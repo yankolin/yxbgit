@@ -1,0 +1,38 @@
+.myheading{
+    background-color: #333;
+}
+
+.logout {
+    margin-right: -15px;
+}
+
+.dropdown-menu li a {
+    margin-left: 5px;
+    text-align: center;
+}
+
+.dropdown-menu li a i {
+    float: left;
+}
+
+.dropdown-menu-title {
+    background: #222;
+    color: #fff;
+    padding: 8px 0px;
+    position: relative;
+    text-align: center;
+}
+
+.index_content p {
+    min-height: 600px;
+}
+
+footer {
+    height: 100px;
+    text-align: center;
+    color: #fff;
+}
+
+footer p {
+    margin-top: 50px;
+}

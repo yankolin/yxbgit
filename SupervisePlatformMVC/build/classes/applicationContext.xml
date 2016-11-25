@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	
+	
+	<!-- 配置自动扫描的包 -->
+			<context:component-scan base-package="com.snmp.*" use-default-filters="false">
+				<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>
+				<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"></context:exclude-filter>
+		</context:component-scan>
+	
+	<!-- 配置数据源 -->
+	<context:property-placeholder location="classpath:snmpmysql.properties" />
+	
+	<!-- 配置DataSource -->
+	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+			<property name="user" value="${jdbc.user}"></property>
+			<property name="password" value="${jdbc.password}"></property>
+			<property name="driverClass" value="${jdbc.driverClass}"></property>
+			<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+	</bean>
+	
+	<!-- 配置sessionFactory orm-->
+	<bean class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" id="sessionFactory">
+			<!-- 配置数据源 -->
+			<property name="dataSource" ref="dataSource"></property>
+			<!-- 扫描的实体包（POJO） -->
+			<property name="namingStrategy">
+					<bean class="org.hibernate.cfg.DefaultNamingStrategy"></bean>
+			</property>
+			<property name="packagesToScan" value="com.snmp.beans"></property>		
+		
+			<property name="hibernateProperties">
+					<props>
+							<!-- 数据库的方言 -->
+							<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+							<prop key="hibernate.show_sql">true</prop>
+							<prop key="hibernate.format_sql">true</prop>
+							<!--  prop key="hibernate.hbm2ddl.auto">update</prop>
+							<prop key="Hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>-->
+							
+							<prop key="hibernate.use_sql_comments">true</prop>
+					</props>
+			</property>			
+	</bean>
+	
+		<!-- 配置Hibernate的事务管理器 -->
+		<bean class="org.springframework.orm.hibernate4.HibernateTransactionManager" id="transactionManager">
+				<property name="sessionFactory" ref="sessionFactory"></property>	
+		</bean>
+	
+		    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
+        <tx:attributes>  
+            <tx:method name="save*" propagation="REQUIRED" />  
+            <tx:method name="add*" propagation="REQUIRED" />  
+            <tx:method name="create*" propagation="REQUIRED" />  
+            <tx:method name="insert*" propagation="REQUIRED" />  
+            <tx:method name="update*" propagation="REQUIRED" />  
+            <tx:method name="merge*" propagation="REQUIRED" />  
+            <tx:method name="del*" propagation="REQUIRED" />  
+            <tx:method name="remove*" propagation="REQUIRED" />  
+            <tx:method name="put*" propagation="REQUIRED" />  
+            <tx:method name="use*" propagation="REQUIRED"/>  
+            <!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到-->  
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="count*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="list*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="*" read-only="true" />  
+        </tx:attributes>  
+    </tx:advice>  
+    <aop:config expose-proxy="true">  
+        <!-- 只对业务逻辑层实施事务 -->  
+        <aop:pointcut id="txPointcut" expression="execution(* cn.snmp.service..*.*(..))" />  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>  
+    </aop:config>  
+		
+</beans>

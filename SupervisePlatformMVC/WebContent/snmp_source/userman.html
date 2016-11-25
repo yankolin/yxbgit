@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="static/css/ingrid.css"/>
+</head>
+
+<body>
+<!-- Page Heading -->
+<div class="row show-grid">
+    <div class="col-lg-12">
+		<h1 class="page-header">
+	   	 用户管理 <small></small>
+		</h1>
+		<ol class="breadcrumb">
+	    	<li class="active">
+				<i class="fa fa-table"></i> 用户列表						
+	    	</li>
+			<button type="button" class="btn btn-primary" style="float:right; margin-top:-5px;margin-right:20px;"  data-toggle="modal" data-target="#btn_userman_addUser">
+				 <i class="glyphicon glyphicon-plus"></i></button>	
+		</ol>
+     </div>
+</div>
+<!-- /.row -->
+
+<table id = "table1" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>用户ID</th>
+				<th>用户名</th>
+				<th>用户类型</th>
+				<th>邮箱地址</th>
+				<th>是否接受预警邮件</th>
+				<th></th>
+			</tr>
+		</thead>
+			<thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>张瑞</td>
+						<td>管理员</td>
+						<td>972582203@qq.com</td>
+						<td>是</td>
+						<td style="text-align: center">
+							<button id="u_alter" type="button" class="btn btn-primary" data-toggle="modal" data-target="#btn_userman_alter_model">
+								<i class="glyphicon glyphicon-edit"></i></button>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userman_delete_modal">
+								<i class="glyphicon glyphicon-trash"></i></button>
+						</td>
+						<td hidden="hidden">2</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>袁雪波</td>
+						<td>管理员</td>
+						<td>yuanxuebo@qq.com</td>
+						<td>否</td>
+						<td style="text-align: center">
+								<button id="u_alter" type="button" class="btn btn-primary" data-toggle="modal" data-target="#btn_userman_alter_model">
+								<i class="glyphicon glyphicon-edit"></i></button>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userman_delete_modal">
+								<i class="glyphicon glyphicon-trash"></i></button></td>
+						<td hidden="hidden">3</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>唐山</td>
+						<td>普通用户</td>
+						<td>tangshan@qq.com</td>
+						<td>否</td>
+						<td style="text-align: center">
+							<button id="u_alter" type="button" class="btn btn-primary" data-toggle="modal" data-target="#btn_userman_alter_model">
+								<i class="glyphicon glyphicon-edit"></i></button>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userman_delete_modal">
+								<i class="glyphicon glyphicon-trash"></i></button></td>
+						<td hidden="hidden">5</td>
+					</tr>									
+				</tbody>
+	</thead>
+</table>
+
+
+	<!-- add modal-->
+	<div class="modal fade" id="btn_userman_addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="txt_userman_title_addUser">添加用户</h4>
+	      </div>
+	      <div class="modal-body">
+			  <form class="form-horizontal">
+				  <div class="form-group">
+					  <label for="txtUMAddusername" class="col-md-3 control-label">用户名:</label>
+					  <div class="col-md-6">
+						  <input type="text" class="form-control" aria-label="Amount" id="txtUMAddUsername" onblur="checkAddUsername(this,lblUMAddErrortip)" placeholder="用户名"/>
+					  </div>
+				  </div>
+				  <div class="form-group">
+					  <label for="txtUMAddPwd" class="col-md-3 control-label">用户密码:</label>
+					  <div class="col-md-6">
+						  <input type="password" class="form-control" id="txtUMAddPwd" onblur="checkAddPwd(this,'lblUMAddErrortip')" placeholder="密码"/>
+					  </div>
+				  </div>
+				  <div class="form-group">
+					  <label for="txtUMAddRepwd" class="col-md-3 control-label">确认密码:</label>
+					  <div class="col-md-6">
+						  <input type="password" class="form-control" id="txtUMAddRepwd" onblur="checkAddRepwd(this,'lblUMAddErrortip')" placeholder="确认密码"/>
+					  </div>
+				  </div>
+				  <div class="form-group">
+					  <label for="emUMAddEmail" class="col-md-3 control-label">用户邮箱:</label>
+					  <div class="col-md-6">
+						  <input type="email" class="form-control" id="emUMAddEmail" onblur="checkAddEmail(this,'lblUMAddErrortip')" placeholder="example@xx.com"/>
+					  </div>
+
+				  </div>
+				  <div class="form-group">
+					  <label for="sltUMAddUsertype" class="col-md-3 control-label">用户类型:</label>
+					  <div class="col-md-6">
+						  <select class="form-control" id="sltUMAddUsertype">
+							  <option value="0">普通用户</option>
+							  <option value="1">管理员</option>
+						  </select>
+					  </div>
+				  </div>
+				  <div class="form-group">
+					  <label for="sltUMAddUsertag" class="col-md-3 control-label">是否接收预警邮件:</label>
+					  <div class="col-md-6">
+						  <select class="form-control" id="sltUMAddUsertag">
+							  <option value="0">是</option>
+							  <option value="1">否</option>
+						  </select>
+					  </div>
+				  </div>
+				  <div class="form-group" style="text-align: center">
+					  <label class="control-label" style="color: red;" id="lblUMAddErrortip"></label>
+				  </div>
+			  </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" id="add_close" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary"  onClick="btn_userman_addUser_submit();">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- ./add modal-->
+
+	<!-- delete modal-->
+	<div class="modal fade" id="userman_delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">删除用户</h4>
+	      </div>
+	      <div class="modal-body">
+			<p>确定要删除该用户吗?</p>
+			  用户ID：<label id="lbl_userman_delete_id"></label> <br/>
+			  用户名：<span id="p_userman_delete_username"></span><br/>
+			  用户类型：<span id="p_userman_delete_userType"></span><br/>
+			  用户邮箱：<span id="p_userman_delete_email"></span>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- ./submit modal-->
+
+	<!-- alter modal-->
+	<div class="modal fade" id="btn_userman_alter_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+	        <h4 class="modal-title" id="lbl_userman_modifyTile">修改</h4>
+	      </div>
+	      <div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+   					 <label class="col-sm-3 control-label" for="lblUMAlterId">用户ID：</label>
+						<div class="col-sm-6">
+ 						 	<label class="col-sm-2 control-label" id="lblUMAlterId"></label>
+						</div>
+  					</div>   
+  					<div class="form-group">
+    		      		<label class="col-sm-3 control-label" for="txtUMAlterUsername">用户名：</label>
+						<div class="col-sm-9">
+    						<input type="text" class="form-control" id="txtUMAlterUsername" onblur="checkAddUsername(this,'lblUMAlterErrortip')" placeholder="用户名">
+						</div>
+  					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="txtUMAlterEmail">邮箱地址：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="txtUMAlterEmail" onblur="checkAddEmail(this,'lblUMAlterErrortip')" placeholder="example@xx.com">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="sltUMAlterAlert" class="col-sm-3 control-label">是否接收预警邮件:</label>
+						<div class="col-sm-9">
+							<select class="form-control " id="sltUMAlterAlert">
+								<option value="1">否</option>
+								<option value="0">是</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group" style="text-align: center">
+						<label class="control-label" style="color: red;" id="lblUMAlterErrortip"></label>
+					</div>
+				</form>  	
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" id="alter_close" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary"  onClick="btn_userman_alter_submit();">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<!-- ./alter modal-->
+<script type="text/javascript" src="static/js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.js"></script>
+<script type="text/javascript" src="static/js/jquery.ingrid.account.js"></script>
+<script type="text/javascript" src="static/js/esm-username.js"></script>
+<script type="text/javascript" src="static/js/common.js"></script>
+
+</body>
+</html>

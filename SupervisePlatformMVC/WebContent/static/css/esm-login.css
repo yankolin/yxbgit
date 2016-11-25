@@ -1,0 +1,19 @@
+#loginBody{
+    /*position:absolute;
+    left: 33%;
+    top:15%;
+    float: right;
+ 	 top:30%;
+    left:25%;*/
+	width:600px;
+	height:350px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-180px 0px 0px -300px;/*设定这个div的margin-top的负值为自身的高度的一半,margin-left的值也是自身的宽度的一半的负值.*/
+	 background-color: whitesmoke;
+	 outline-style: hidden;
+	border: #7ED5FF ridge 5px;
+	text-align:center;
+	  
+}

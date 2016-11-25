@@ -1,0 +1,3 @@
+table tr td span{height:20px !important;}
+table tr td span:first-child{padding-left: 0 !important;}
+table{height:100px !important;overflow-x:auto !important;}

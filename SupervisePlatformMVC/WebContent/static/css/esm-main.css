@@ -1,0 +1,110 @@
+.pie-chart-tiny{
+     display: inline-block;
+    position: relative;
+    margin: 3px 10px 0;
+    padding-bottom: 13px;
+    width: 100px;
+    height: 100px;
+
+}
+
+.percent {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 36px;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.68);
+    text-shadow: none;
+    padding-left: 2px;
+}
+.percent:after {
+    content: '%';
+}
+.pie-chart-tiny1{
+     display: inline-block;
+    position: relative;
+    margin: 3px 10px 0;
+    padding-bottom: 13px;
+    width: 100px;
+    height: 100px;
+
+}
+.percent1 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 36px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.68);
+    text-shadow: none;
+    padding-left: 2px;
+    
+}
+.percent1:after {
+    content: 'KB/S';
+}
+  .percent2 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 36px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.68);
+    text-shadow: none;
+    padding-left: 2px;
+    
+}
+.percent2:after {
+    content: 'MB/S';
+} 
+ .percent3 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 36px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.68);
+    text-shadow: none;
+    padding-left: 2px;
+    
+}
+.percent3:after {
+    content: 'KB/S';
+} 
+   
+
+
+.pie-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.68);
+}
+.legend {
+    width: 10em;
+
+}
+
+.legend .title {
+    display: block;
+    margin-bottom: 0.5em;
+    line-height: 1.2em;
+    padding: 0 0.3em;
+    color: #0f0f0f;
+    font-size: small;
+}
+
+.legend .color-sample {
+    display: block;
+    float: left;
+    width: 1em;
+    height: 1em;
+    border: 2px solid; /* Comment out if you don't want to show the fillColor */
+    border-radius: 0.5em; /* Comment out if you prefer squarish samples */
+    margin-right: 0.5em;
+}
+
+

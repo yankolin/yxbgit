@@ -1,0 +1,39 @@
+
+															
+															<% int i = 0;%>
+															<c:forEach items = "${user_data}" var = "data" varStatus = "status">
+																<tr id="${data.userManId}">
+																<td><%=++i%></td>
+																 <td>${data.userManName}</td>
+																<td>
+																<c:choose>
+															    <c:when test="${data.userManType <= 0}">
+															       					普通用户
+															    </c:when>
+															    <c:when test="${data.userManType <= 1}">
+															       					 管理员
+															    </c:when>
+															    <c:otherwise>
+															       					 其他
+															    </c:otherwise>
+																</c:choose>
+																</td>
+																<td>${data.userManEmail}</td>
+																<td>
+																<c:choose>
+																	<c:when test="${data.userManTag <= 0}">
+																	     是
+																	</c:when>
+																	<c:when test="${data.userManTag > 0 }">
+																			否
+																	</c:when>
+																</c:choose></td>
+																<td style="text-align: center">
+																				<button  type="button" class="btn btn-primary" onClick="btnUMAlterUser(${data.userManId})" >
+																					<i class="glyphicon glyphicon-edit"></i></button>
+																				<button type="button" class="btn btn-primary" onClick="btnUMDelUser(${data.userManId})" data-toggle="modal" data-target="#userman_delete_modal">
+																					<i class="glyphicon glyphicon-trash"></i></button>
+																</td>
+																<td  style="display:none">${data.userManTag}</td>
+																</tr>
+															</c:forEach>

@@ -1,0 +1,45 @@
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 0%;
+}
+
+
+.one{
+  border: solid;
+  color: #00CCFF;
+  width: 200px;
+  height: 326px;
+  margin-top: 5px;
+}
+.one .img-responsive{
+	 margin-top:2px;
+  margin-bottom: 3px;
+}
+.two{
+  height: auto;
+  width: 164px;
+  margin-left: 2px;
+  float: left;
+}
+
+.form-Control-left{
+  float: left;
+}
+
+
